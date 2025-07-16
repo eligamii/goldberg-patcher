@@ -1,0 +1,17 @@
+[package]
+name = "goldberg-patcher"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+futures = "*"
+reqwest = { version = "*", features = ["stream"] }
+tokio = { version = "*", features = ["macros", "rt", "rt-multi-thread"] }
+
+# The linux version of the gbe_fork archive a tar.bz2 
+[target.'cfg(target_os = "linux")'.dependencies]
+decompress = { version = "*", default-features = false, features = ["tarbz"] }
+
+# The windows version is a 7z
+[target.'cfg(target_os = "windows")'.dependencies]
+sevenz-rust2 = {version = "*", features = ["util"] }
